@@ -1,12 +1,12 @@
 package org.example.persistence.mapper;
 
-
 import org.example.domain.model.CardioExercise;
 import org.example.domain.model.Exercise;
 import org.example.domain.model.StrengthExercise;
 import org.example.persistence.entity.CardioExerciseEnt;
 import org.example.persistence.entity.ExerciseEnt;
 import org.example.persistence.entity.StrengthExerciseEnt;
+import org.hibernate.Hibernate;
 
 public final class ExerciseMapper {
 
@@ -37,8 +37,16 @@ public final class ExerciseMapper {
         );
     }
 
+
     public static Exercise toDomain(ExerciseEnt entity) {
-        if (entity instanceof StrengthExerciseEnt strength) {
+        if (entity == null) {
+            return null;
+        }
+
+        ExerciseEnt actualEntity =
+                (ExerciseEnt) Hibernate.unproxy(entity);
+
+        if (actualEntity instanceof StrengthExerciseEnt strength) {
             return new StrengthExercise(
                     strength.getId(),
                     strength.getName(),
@@ -47,7 +55,7 @@ public final class ExerciseMapper {
             );
         }
 
-        if (entity instanceof CardioExerciseEnt cardio) {
+        if (actualEntity instanceof CardioExerciseEnt cardio) {
             return new CardioExercise(
                     cardio.getId(),
                     cardio.getName(),
@@ -58,7 +66,8 @@ public final class ExerciseMapper {
 
         throw new IllegalArgumentException(
                 "Unsupported exercise entity type: "
-                        + entity.getClass().getName()
+                        + actualEntity.getClass().getName()
         );
     }
+
 }

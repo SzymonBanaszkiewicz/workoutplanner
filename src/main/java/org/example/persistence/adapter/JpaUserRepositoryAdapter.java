@@ -1,13 +1,12 @@
 package org.example.persistence.adapter;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.example.domain.model.User;
 import org.example.persistence.config.JpaConfig;
 import org.example.persistence.entity.UserEnt;
 import org.example.ports.repository.UserRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 import java.util.Optional;

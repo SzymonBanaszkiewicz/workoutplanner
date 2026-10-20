@@ -1,4 +1,4 @@
-package pl.workoutplanner.persistence;
+package org.example.persistence;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.example.persistence.config.JpaConfig;

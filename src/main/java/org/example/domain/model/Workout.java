@@ -1,15 +1,12 @@
 package org.example.domain.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class Workout {
 
     private final UUID id;
+    private Long version;
     private final UUID userId;
 
     private String name;
@@ -40,6 +37,14 @@ public class Workout {
         this(UUID.randomUUID(), userId, name, performedAt);
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -52,14 +57,17 @@ public class Workout {
         return name;
     }
 
+
     public void setName(String name) {
-        if (name == null || name.isEmpty()) {
+        if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "Workout name cannot be empty"
             );
         }
+
         this.name = name.trim();
     }
+
 
     public LocalDateTime getPerformedAt() {
         return performedAt;

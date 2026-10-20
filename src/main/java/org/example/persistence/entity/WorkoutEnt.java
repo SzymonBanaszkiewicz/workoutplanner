@@ -1,6 +1,7 @@
 package org.example.persistence.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class WorkoutEnt {
 
     @Id
     private UUID id;
+    @Version
+    private Long version;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -37,6 +40,10 @@ public class WorkoutEnt {
         this.id = id;
         this.name = name;
         this.performedAt = performedAt;
+    }
+
+    public Long getVersion() {
+        return version;
     }
 
     public UUID getId() {

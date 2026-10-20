@@ -3,6 +3,7 @@ package org.example.persistence.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+
 import java.util.UUID;
 
 @Entity

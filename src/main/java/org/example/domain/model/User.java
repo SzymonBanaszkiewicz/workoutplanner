@@ -1,10 +1,6 @@
 package org.example.domain.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class User {
 
@@ -33,21 +29,24 @@ public class User {
         return username;
     }
 
+
     public void setUsername(String username) {
-        if (username == null || username.isEmpty()) {
+        if (username == null || username.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "Username cannot be empty"
             );
         }
+
         this.username = username.trim();
     }
+
 
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-        if (email == null || email.isEmpty()
+        if (email == null || email.trim().isEmpty()
                 || !email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
             throw new IllegalArgumentException(
                     "Invalid email address"

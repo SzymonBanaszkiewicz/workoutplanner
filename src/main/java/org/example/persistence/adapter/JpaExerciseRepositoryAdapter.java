@@ -4,7 +4,6 @@ package org.example.persistence.adapter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-
 import org.example.domain.model.Exercise;
 import org.example.persistence.config.JpaConfig;
 import org.example.persistence.entity.ExerciseEnt;
@@ -85,6 +84,7 @@ public class JpaExerciseRepositoryAdapter implements ExerciseRepository {
         }
     }
 
+
     @Override
     public void deleteById(UUID id) {
         EntityManager em = entityManagerFactory.createEntityManager();
@@ -95,10 +95,27 @@ public class JpaExerciseRepositoryAdapter implements ExerciseRepository {
 
             ExerciseEnt entity = em.find(ExerciseEnt.class, id);
 
-            if (entity != null) {
-                em.remove(entity);
+            if (entity == null) {
+                tx.commit();
+                return;
             }
 
+            Long usageCount = em.createQuery(
+                            "SELECT COUNT(entry) FROM WorkoutEntryEnt entry "
+                                    + "WHERE entry.exercise.id = :exerciseId",
+                            Long.class
+                    )
+                    .setParameter("exerciseId", id)
+                    .getSingleResult();
+
+            if (usageCount > 0) {
+                throw new IllegalStateException(
+                        "Cannot delete exercise because it is used "
+                                + "in " + usageCount + " workout entries."
+                );
+            }
+
+            em.remove(entity);
             tx.commit();
 
         } catch (RuntimeException e) {
@@ -110,4 +127,5 @@ public class JpaExerciseRepositoryAdapter implements ExerciseRepository {
             em.close();
         }
     }
+
 }

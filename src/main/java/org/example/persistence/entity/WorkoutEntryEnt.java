@@ -1,6 +1,7 @@
 package org.example.persistence.entity;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -81,5 +82,21 @@ public class WorkoutEntryEnt {
 
     public void setExercise(ExerciseEnt exercise) {
         this.exercise = exercise;
+    }
+
+    public void setSets(Integer sets) {
+        this.sets = sets;
+    }
+
+    public void setRepetitions(Integer repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public void setWeightKg(BigDecimal weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public void setDurationMinutes(Integer durationMinutes) {
+        this.durationMinutes = durationMinutes;
     }
 }

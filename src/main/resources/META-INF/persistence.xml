@@ -33,6 +33,9 @@
             <property name="hibernate.hbm2ddl.auto"
                       value="update"/>
 
+            <property name="hibernate.connection.isolation"
+                      value="2"/>
+
             <property name="hibernate.show_sql"
                       value="true"/>
 

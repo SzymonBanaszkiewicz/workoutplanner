@@ -1,17 +1,50 @@
+
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import org.example.application.service.ExerciseService;
+import org.example.application.service.UserService;
+import org.example.application.service.WorkoutService;
+import org.example.persistence.adapter.JpaExerciseRepositoryAdapter;
+import org.example.persistence.adapter.JpaUserRepositoryAdapter;
+import org.example.persistence.adapter.JpaWorkoutRepositoryAdapter;
+import org.example.persistence.config.JpaConfig;
+import org.example.ui.ConsoleMenu;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            JpaUserRepositoryAdapter userRepository =
+                    new JpaUserRepositoryAdapter();
+
+            JpaExerciseRepositoryAdapter exerciseRepository =
+                    new JpaExerciseRepositoryAdapter();
+
+            JpaWorkoutRepositoryAdapter workoutRepository =
+                    new JpaWorkoutRepositoryAdapter();
+
+            UserService userService =
+                    new UserService(userRepository);
+
+            ExerciseService exerciseService =
+                    new ExerciseService(exerciseRepository);
+
+            WorkoutService workoutService =
+                    new WorkoutService(
+                            workoutRepository,
+                            userRepository,
+                            exerciseRepository
+                    );
+
+            ConsoleMenu menu = new ConsoleMenu(
+                    userService,
+                    exerciseService,
+                    workoutService
+            );
+
+            menu.run();
+        } finally {
+            JpaConfig.shutdown();
         }
     }
 }
