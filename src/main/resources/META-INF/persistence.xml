@@ -11,12 +11,12 @@
         <provider>
             org.hibernate.jpa.HibernatePersistenceProvider
         </provider>
-        <class>org.example.persistence.entity.UserEnt</class>
-        <class>org.example.persistence.entity.WorkoutEnt</class>
-        <class>org.example.persistence.entity.WorkoutEntryEnt</class>
-        <class>org.example.persistence.entity.ExerciseEnt</class>
-        <class>org.example.persistence.entity.StrengthExerciseEnt</class>
-        <class>org.example.persistence.entity.CardioExerciseEnt</class>
+        <class>org.example.persistence.postgres.entity.UserEnt</class>
+        <class>org.example.persistence.postgres.entity.WorkoutEnt</class>
+        <class>org.example.persistence.postgres.entity.WorkoutEntryEnt</class>
+        <class>org.example.persistence.postgres.entity.ExerciseEnt</class>
+        <class>org.example.persistence.postgres.entity.StrengthExerciseEnt</class>
+        <class>org.example.persistence.postgres.entity.CardioExerciseEnt</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver"
                       value="org.postgresql.Driver"/>

@@ -1,6 +1,9 @@
 package org.example.persistence.adapter;
 
 import org.example.domain.model.*;
+import org.example.persistence.postgres.adapter.JpaExerciseRepositoryAdapter;
+import org.example.persistence.postgres.adapter.JpaUserRepositoryAdapter;
+import org.example.persistence.postgres.adapter.JpaWorkoutRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

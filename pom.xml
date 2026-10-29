@@ -17,6 +17,18 @@
     <junit.version>5.12.2</junit.version>
 </properties>
 
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-bom</artifactId>
+            <version>5.13.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
 <dependencies>
     <!-- JPA API -->
     <dependency>
@@ -24,6 +36,13 @@
         <artifactId>jakarta.persistence-api</artifactId>
         <version>3.1.0</version>
     </dependency>
+
+
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+    </dependency>
+
 
     <dependency>
         <groupId>org.hibernate.orm</groupId>
@@ -60,8 +79,8 @@
             <version>3.14.0</version>
             <configuration>
                 <release>${maven.compiler.release}</release>
-                <source>16</source>
-                <target>16</target>
+                <source>23</source>
+                <target>23</target>
             </configuration>
         </plugin>
 

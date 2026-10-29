@@ -1,11 +1,11 @@
-package org.example.persistence.mapper;
+package org.example.persistence.postgres.mapper;
 
 import org.example.domain.model.CardioExercise;
 import org.example.domain.model.Exercise;
 import org.example.domain.model.StrengthExercise;
-import org.example.persistence.entity.CardioExerciseEnt;
-import org.example.persistence.entity.ExerciseEnt;
-import org.example.persistence.entity.StrengthExerciseEnt;
+import org.example.persistence.postgres.entity.CardioExerciseEnt;
+import org.example.persistence.postgres.entity.ExerciseEnt;
+import org.example.persistence.postgres.entity.StrengthExerciseEnt;
 import org.hibernate.Hibernate;
 
 public final class ExerciseMapper {

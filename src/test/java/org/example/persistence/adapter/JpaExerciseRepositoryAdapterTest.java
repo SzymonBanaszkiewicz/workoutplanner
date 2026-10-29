@@ -3,7 +3,8 @@ package org.example.persistence.adapter;
 
 import org.example.domain.model.Exercise;
 import org.example.domain.model.StrengthExercise;
-import org.example.persistence.config.JpaConfig;
+import org.example.persistence.postgres.config.JpaConfig;
+import org.example.persistence.postgres.adapter.JpaExerciseRepositoryAdapter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 

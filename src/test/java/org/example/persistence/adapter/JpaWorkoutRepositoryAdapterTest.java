@@ -6,11 +6,12 @@ import jakarta.persistence.EntityTransaction;
 import org.example.domain.model.StrengthExercise;
 import org.example.domain.model.Workout;
 import org.example.domain.model.WorkoutEntry;
-import org.example.persistence.config.JpaConfig;
-import org.example.persistence.entity.ExerciseEnt;
-import org.example.persistence.entity.UserEnt;
-import org.example.persistence.entity.WorkoutEntryEnt;
-import org.example.persistence.mapper.ExerciseMapper;
+import org.example.persistence.postgres.config.JpaConfig;
+import org.example.persistence.postgres.entity.ExerciseEnt;
+import org.example.persistence.postgres.entity.UserEnt;
+import org.example.persistence.postgres.entity.WorkoutEntryEnt;
+import org.example.persistence.postgres.adapter.JpaWorkoutRepositoryAdapter;
+import org.example.persistence.postgres.mapper.ExerciseMapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -110,7 +111,7 @@ class JpaWorkoutRepositoryAdapterTest {
         assertEquals(userId, found.get().getUserId());
         assertEquals(1, found.get().getEntries().size());
 
-        WorkoutEntry entry = found.get().getEntries().get(0);
+        WorkoutEntry entry = found.get().getEntries().getFirst();
         assertEquals("Bench Press", entry.getExercise().getName());
         assertEquals(3, entry.getSets());
         assertEquals(10, entry.getRepetitions());
@@ -136,7 +137,7 @@ class JpaWorkoutRepositoryAdapterTest {
         assertEquals("Push Day Updated", updatedFromDb.get().getName());
         assertEquals(1, updatedFromDb.get().getEntries().size());
 
-        UUID entryId = updated.getEntries().get(0).getId();
+        UUID entryId = updated.getEntries().getFirst().getId();
 
         workouts.deleteById(updated.getId());
 

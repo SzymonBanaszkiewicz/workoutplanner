@@ -1,4 +1,4 @@
-package org.example.persistence.entity;
+package org.example.persistence.postgres.entity;
 
 import jakarta.persistence.*;
 

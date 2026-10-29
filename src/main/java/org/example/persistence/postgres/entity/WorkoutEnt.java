@@ -1,4 +1,4 @@
-package org.example.persistence.entity;
+package org.example.persistence.postgres.entity;
 
 import jakarta.persistence.*;
 
@@ -31,7 +31,7 @@ public class WorkoutEnt {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<WorkoutEntryEnt> entries = new ArrayList<>();
+    private final List<WorkoutEntryEnt> entries = new ArrayList<>();
 
     protected WorkoutEnt() {
     }
