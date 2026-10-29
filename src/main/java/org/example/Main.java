@@ -1,27 +1,55 @@
-
 package org.example;
 
 import org.example.application.service.ExerciseService;
 import org.example.application.service.UserService;
 import org.example.application.service.WorkoutService;
-import org.example.persistence.postgres.adapter.JpaExerciseRepositoryAdapter;
-import org.example.persistence.postgres.adapter.JpaUserRepositoryAdapter;
-import org.example.persistence.postgres.adapter.JpaWorkoutRepositoryAdapter;
-import org.example.persistence.postgres.config.JpaConfig;
+
+import org.example.persistence.mongo.adapter.MongoExerciseRepositoryAdapter;
+import org.example.persistence.mongo.adapter.MongoUserRepositoryAdapter;
+import org.example.persistence.mongo.adapter.MongoWorkoutRepositoryAdapter;
+
+import org.example.persistence.mongo.config.MongoConfig;
+import org.example.persistence.mongo.config.MongoIndexInitializer;
+
+import org.example.persistence.mongo.repository.MongoExerciseRepository;
+import org.example.persistence.mongo.repository.MongoUserRepository;
+import org.example.persistence.mongo.repository.MongoWorkoutRepository;
+
 import org.example.ui.ConsoleMenu;
 
 public class Main {
 
     public static void main(String[] args) {
+        MongoConfig mongoConfig = null;
+
         try {
-            JpaUserRepositoryAdapter userRepository =
-                    new JpaUserRepositoryAdapter();
+            mongoConfig = new MongoConfig();
 
-            JpaExerciseRepositoryAdapter exerciseRepository =
-                    new JpaExerciseRepositoryAdapter();
+            MongoIndexInitializer indexInitializer =
+                    new MongoIndexInitializer(mongoConfig.getDatabase());
 
-            JpaWorkoutRepositoryAdapter workoutRepository =
-                    new JpaWorkoutRepositoryAdapter();
+            indexInitializer.initialize();
+
+            MongoUserRepository mongoUserRepository =
+                    new MongoUserRepository(mongoConfig.getDatabase());
+
+            MongoExerciseRepository mongoExerciseRepository =
+                    new MongoExerciseRepository(mongoConfig.getDatabase());
+
+            MongoWorkoutRepository mongoWorkoutRepository =
+                    new MongoWorkoutRepository(mongoConfig.getDatabase());
+
+            MongoUserRepositoryAdapter userRepository =
+                    new MongoUserRepositoryAdapter(mongoUserRepository);
+
+            MongoExerciseRepositoryAdapter exerciseRepository =
+                    new MongoExerciseRepositoryAdapter(mongoExerciseRepository);
+
+            MongoWorkoutRepositoryAdapter workoutRepository =
+                    new MongoWorkoutRepositoryAdapter(
+                            mongoWorkoutRepository,
+                            mongoExerciseRepository
+                    );
 
             UserService userService =
                     new UserService(userRepository);
@@ -43,8 +71,11 @@ public class Main {
             );
 
             menu.run();
+
         } finally {
-            JpaConfig.shutdown();
+            if (mongoConfig != null) {
+                mongoConfig.close();
+            }
         }
     }
 }
