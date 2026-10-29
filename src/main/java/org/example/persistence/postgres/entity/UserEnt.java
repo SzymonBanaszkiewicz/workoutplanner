@@ -1,4 +1,4 @@
-package org.example.persistence.entity;
+package org.example.persistence.postgres.entity;
 
 import jakarta.persistence.*;
 
@@ -16,7 +16,7 @@ public class UserEnt {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(
@@ -24,7 +24,7 @@ public class UserEnt {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<WorkoutEnt> workouts = new ArrayList<>();
+    private final List<WorkoutEnt> workouts = new ArrayList<>();
 
     protected UserEnt() {
     }

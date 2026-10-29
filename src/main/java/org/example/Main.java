@@ -4,10 +4,10 @@ package org.example;
 import org.example.application.service.ExerciseService;
 import org.example.application.service.UserService;
 import org.example.application.service.WorkoutService;
-import org.example.persistence.adapter.JpaExerciseRepositoryAdapter;
-import org.example.persistence.adapter.JpaUserRepositoryAdapter;
-import org.example.persistence.adapter.JpaWorkoutRepositoryAdapter;
-import org.example.persistence.config.JpaConfig;
+import org.example.persistence.postgres.adapter.JpaExerciseRepositoryAdapter;
+import org.example.persistence.postgres.adapter.JpaUserRepositoryAdapter;
+import org.example.persistence.postgres.adapter.JpaWorkoutRepositoryAdapter;
+import org.example.persistence.postgres.config.JpaConfig;
 import org.example.ui.ConsoleMenu;
 
 public class Main {

@@ -1,4 +1,4 @@
-package org.example.persistence.config;
+package org.example.persistence.postgres.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

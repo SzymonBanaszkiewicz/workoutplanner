@@ -1,7 +1,7 @@
 package org.example.persistence;
 
 import jakarta.persistence.EntityManagerFactory;
-import org.example.persistence.config.JpaConfig;
+import org.example.persistence.postgres.config.JpaConfig;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

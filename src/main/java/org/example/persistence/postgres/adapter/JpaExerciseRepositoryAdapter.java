@@ -1,13 +1,13 @@
 
-package org.example.persistence.adapter;
+package org.example.persistence.postgres.adapter;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import org.example.domain.model.Exercise;
-import org.example.persistence.config.JpaConfig;
-import org.example.persistence.entity.ExerciseEnt;
-import org.example.persistence.mapper.ExerciseMapper;
+import org.example.persistence.postgres.config.JpaConfig;
+import org.example.persistence.postgres.entity.ExerciseEnt;
+import org.example.persistence.postgres.mapper.ExerciseMapper;
 import org.example.ports.repository.ExerciseRepository;
 
 import java.util.List;
